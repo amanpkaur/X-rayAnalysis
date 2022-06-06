@@ -30,7 +30,7 @@ counts_xspec=[]
 #### Change these values#####
 name="Mrk421"
 mission = 'swiftmastr'
-path="/Users/aman/Desktop/Mrk421/2021"
+path="/Users/test"
 ap=45 #aperture
 back_in=170
 back_out=200
