@@ -1,0 +1,100 @@
+
+# Keep going until fit converges.query yes
+method leven 10 0.01
+abund wilm
+xsect bcmc
+cosmo 70 0 0.73
+xset delta 0.01
+systematic 0
+statistic chi
+query yes
+ 
+# Open the file to put the results in.
+set fileid [open fit_result.dat w]
+ 
+
+# Set up the model.
+	model tbabs(cflux*po) & /*
+	newpar 1 0.016 -1 
+	newpar 2 0.3 -1
+	newpar 3 10.0 -1
+        newpar 6 1.0e+10 -1
+	 
+# Get the file.
+	data fspec
+	setplot energy
+	ignore bad
+	ignore **-0.3 10.0-** 
+# Fit it to the model.
+	fit
+	xset error max 3.0
+	fit 
+	error 4 5
+	parallel steppar 4
+	steppar 4 -7.5 -11.0 100
+	error 4 5
+	cpd fspecplot.ps/cps
+	plot ufspec delchi
+	plot ldata res
+ 	cpd none
+# Get the values specified for parameter 4 qnd 5.
+	tclout param 4
+	set par4 [string trim $xspec_tclout]
+	tclout error 4
+	set err4 [string trim $xspec_tclout]
+	set lowerr4 [format %0.6f [lindex $err4 0] ]
+   	set uperr4 [format %0.6f [lindex $err4 1] ]
+
+	tclout param 5
+	set par5 [string trim $xspec_tclout]
+	tclout error 5
+	set err5 [string trim $xspec_tclout]
+	set lowerr5 [format %0.6f [lindex $err5 0] ]
+        set uperr5 [format %0.6f [lindex $err5 1] ]
+
+	tclout param 6
+	set par6 [string trim $xspec_tclout]
+
+	tclout stat	
+	set chistat [string trim $xspec_tclout]
+
+	tclout dof
+	set dof [string trim $xspec_tclout]
+
+	
+
+
+# Turn it into a Tcl list.
+	regsub -all { +} $par4 { } cpar4
+	regsub -all { +} $lowerr4 { } clowerr4
+	regsub -all { +} $uperr4 { } cuperr4
+	set lpar4 [split $cpar4]
+	set lowerr4 [split $clowerr4]
+	set uperr4 [split $cuperr4]
+
+	regsub -all { +} $par5 { } cpar5
+	regsub -all { +} $lowerr5 { } clowerr5
+	regsub -all { +} $uperr5 { } cuperr5
+	set lpar5 [split $cpar5]
+	set lowerr5 [split $clowerr5]
+	set uperr5 [split $cuperr5]
+ 
+	regsub -all { +} $par6 { } cpar6
+	set lpar6 [split $cpar6]
+
+	regsub -all { +} $chistat { } cchistat
+	set lchistat [split $cchistat]
+
+	regsub -all { +} $dof { } cdof
+	set ldof [split $cdof]
+	
+
+# Print out the result to the file.� Parameter value is
+# the 0th element of the list `lpar4'.
+	puts $fileid "1 [lindex $lpar5 0] [lindex $lowerr5 0] [lindex $uperr5 0] [lindex $lpar4 0] [lindex $lowerr4 0] [lindex $uperr4 0] [lindex $lpar6 0] [lindex $lchistat 0] [lindex $ldof 0]"
+ 
+
+ 
+# Close the file.
+close $fileid
+
