@@ -1,8 +1,4 @@
-# This script gives an example of how one might use the power of tcl's
-# scripting language in an XSPEC session.� In this example, XSPEC loops
-# thru 3 data files (file1, file2 and file3) and fits them each to the
-# same model `wabs(po+ga)'.� After the fit the value of parameter 4 (the
-# line energy for the gaussian) for each data set is saved to a file.
+# Tthis is a tcl script to fit and write final data results, i.e. flux and other model parameters to a  file.
  
 # Keep going until fit converges.query yes
 method leven 10 0.01
