@@ -20,7 +20,7 @@ mjd=[]
 fluence=[]
 counts_xspec=[]
 os.system("export HEADASNOQUERY= \nexport HEADASPROMPT=/dev/null")
-#### Change these values#####
+#### Change these values as needed #####
 name="3C273"
 mission = 'swiftmastr'
 coords=coord.SkyCoord.from_name(name,frame="icrs")
@@ -31,7 +31,7 @@ box_l=40*pix_Scale # pixels
 box_w=20*pix_Scale
 back_in=100*pix_Scale
 back_out=200*pix_Scale
-path="/Users/aman/Desktop/3C273/2017/final/test"
+path="/Users/test"
 
 ##### THE DATA DOWNLOAD SCRIPT IS IN THE "swift_analysis.py" script ################
 
