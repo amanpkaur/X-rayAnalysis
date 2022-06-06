@@ -1,3 +1,4 @@
+# Tthis is a tcl script to fit and write final data results, i.e. flux and other model parameters to a  file.
 
 # Keep going until fit converges.query yes
 method leven 10 0.01
@@ -89,7 +90,7 @@ set fileid [open fit_result.dat w]
 	set ldof [split $cdof]
 	
 
-# Print out the result to the file.� Parameter value is
+# Print out the result to the file. Parameter value is
 # the 0th element of the list `lpar4'.
 	puts $fileid "1 [lindex $lpar5 0] [lindex $lowerr5 0] [lindex $uperr5 0] [lindex $lpar4 0] [lindex $lowerr4 0] [lindex $uperr4 0] [lindex $lpar6 0] [lindex $lchistat 0] [lindex $ldof 0]"
  
