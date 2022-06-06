@@ -1,5 +1,5 @@
 # coding: utf8
-# To find all the cleaned event files and then do the spectral fits for all the grouped spectra.
+# To find all the cleaned event files and then do the spectral fits for all the grouped spectra on the pc mode in swift data
 # this script saves two files : 1) log file with all the fitting results+tstart for all the files and 2) the final flux and error
 import os
 import xspec
@@ -15,8 +15,8 @@ import fileinput
 import numpy as np
 import pathlib
 os.system("export HEADASNOQUERY= \nexport HEADASPROMPT=/dev/null")
-name='3C273'
-path="/Users/aman/Desktop/"f'{name}'"/2018"
+name='3C273'#astronomical name of the object
+path="/Users/"f'{name}'"/current"
 res=[]
 nores=[]
 os.chdir(path)
@@ -27,7 +27,7 @@ for dirpath, dirnames, filenames in os.walk(path):
         file=pathlib.Path("fspec1.pha")
         if file.exists():
             
-            os.system("cp /Users/aman/Desktop/scripts/tclex.xcm .")
+            os.system("cp ../tclex.xcm .")
             no_files=len(subprocess.check_output("ls fspec*.pha",shell=True).decode().split())
             print(no_files)
             if no_files == 0.:
@@ -85,13 +85,3 @@ for dirpath, dirnames, filenames in os.walk(path):
 
     print(nores)
 
-"""
-    no_files=len(subprocess.check_output("ls fspec*.pha",shell=True).decode().split()
-    count=0
-    os.system("cp /Users/aman/Desktop/scripts/tclex.xcm .")
-    for i in range(1,no_files+1):
-    cmd_i="xspec <<EOF\ndata fspec"+str(i)+".pha\nexit\nEOF"
-    out_i=subprocess.check_output(cmd_i,shell=True).decode()
-    if float([s for s in re.findall("-?\d+.?\d*(?:[Ee]-\d+)?",out)][12])>0.0:
-    count+=1
-    """
