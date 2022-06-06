@@ -1,5 +1,5 @@
 # coding: utf8
-# To find all the cleaned event files and then do the spectral fits for all the grouped spectra on the pc mode in swift data
+# To find all the cleaned event files and then do the spectral fits for all the grouped spectra on the wt mode in swift data
 # this script saves two files : 1) log file with all the fitting results+tstart for all the files and 2) the final flux and error
 import os
 import xspec
